@@ -8,7 +8,7 @@
         <mat-form-field class="width-300 margin-right-16">
             <input  matInput placeholder="Enter new task" [formControl]="taskname">
         </mat-form-field>
-        <button mat-raised-button color="primary">
+        <button mat-raised-button color="primary" [disabled]="taskname.invalid"  (click)="addTodo()">
             <mat-icon>add</mat-icon>
             Add
         </button>

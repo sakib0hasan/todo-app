@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Todo} from '../../model/todo';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import * as _ from 'lodash';
 
 @Component({
@@ -23,7 +23,7 @@ export class TodoListComponent implements OnInit {
         'Narrow Down Your Keyword List',
         'Choose Target Keywords'
     ];
-    taskname = new FormControl('');
+    taskname = new FormControl('', Validators.required);
 
     constructor() {
     }
@@ -39,5 +39,13 @@ export class TodoListComponent implements OnInit {
         _.find(this.todos, todo => {
             return todo.id === id;
         }).completed = isChecked;
+    }
+
+    addTodo() {
+        // get last id
+        let newId = this.todos[this.todos.length - 1].id + 1;
+        let t = new Todo(newId, this.taskname.value, false);
+        this.todos.push(t);
+        this.taskname.reset();
     }
 }
