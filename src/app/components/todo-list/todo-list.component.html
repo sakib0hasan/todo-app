@@ -1,5 +1,16 @@
-<div>
-    <div *ngFor="let todo of todos;">
-        {{todo.taskname}}
+<div class="padding-24">
+    <div class="task" *ngFor="let todo of todos;">
+        <mat-checkbox (change)="onTaskComplete(todo.id, $event.checked)"  color="primary">
+            <div [ngClass]="{'completed': todo.completed}">{{todo.taskname}}</div>
+        </mat-checkbox>
     </div>
+    <form class="margin-top-24">
+        <mat-form-field class="width-300 margin-right-16">
+            <input  matInput placeholder="Enter new task" [formControl]="taskname">
+        </mat-form-field>
+        <button mat-raised-button color="primary">
+            <mat-icon>add</mat-icon>
+            Add
+        </button>
+    </form>
 </div>
